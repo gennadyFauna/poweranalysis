@@ -190,7 +190,7 @@ if st.session_state.computed:
         fig1.tight_layout()
 
         with col2_placeholder.container():
-            st.write(f"Expected # samples (approx dispersion): {n}")
+            st.write(f"Expected # samples (approximate dispersion): {n}")
             st.write(f"Theoretical minimum (zero dispersion): {n_min}")
             st.write(f"Low dispersion (optimistic): {n_opt}")
             st.write(f"High dispersion (pessimistic): {n_pes}")
