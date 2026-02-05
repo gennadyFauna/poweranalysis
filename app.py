@@ -76,18 +76,18 @@ with col1:
     if mode=="Single-cell":
         n_cells = st.number_input("Number of cells", value=7500, min_value=1, step=100,format='%u')
         cell_pct = st.number_input("Cell type %", value=10.0, min_value=0.0001, step=1.0,format='%g')
-        avg_expr = st.number_input("Average expression in cell type", value=0.1, min_value=1e-6, step=0.01,format='%g')
+        avg_expr = st.number_input("Average expression in cell type (UMIs per barcode)", value=0.1, min_value=1e-6, step=0.01,format='%g')
         base_mean = n_cells*(cell_pct/100.0)*avg_expr
     else:
-        base_mean = st.number_input("Base expression (bulk)", value=100.0, min_value=1e-6, step=1.0,format='%g')
+        base_mean = st.number_input("Base expression (raw counts, bulk)", value=100.0, min_value=1e-6, step=1.0,format='%g')
 
     alpha_raw = st.number_input("Statistical significance threshold (alpha)", value=0.05, min_value=1e-300, step=0.01,format='%g')
     l2fc = st.number_input("log2 fold change", value=1.0, step=0.1,format='%g')
     fdir_mode = st.radio("False discovery correction", ["Benjamini-Hochberg","Bonferroni"],horizontal=True)
     if fdir_mode=="Bonferroni":
-        n_genes = st.number_input("Number of comparisons", value=20000, min_value=1, step=100,format='%u')
+        n_genes = st.number_input("Number of comparisons (genes in analysis)", value=20000, min_value=1, step=100,format='%u')
     elif fdir_mode=="Benjamini-Hochberg":
-        n_genes_raw = st.number_input("Number of comparisons", value=20000, min_value=1, step=100,format='%u')
+        n_genes_raw = st.number_input("Number of comparisons (genes in analysis)", value=20000, min_value=1, step=100,format='%u')
         q = st.number_input("Expected % genes differentially expressed", value=10.0, min_value=0.0, max_value=100.0, step=2.0,format='%g')
         q = np.clip(q/100,1/n_genes_raw,1)
         n_genes = n_genes_raw*q
